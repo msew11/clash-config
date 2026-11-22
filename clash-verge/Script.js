@@ -28,13 +28,7 @@ const ROUTING_GROUPS = [
       "RULE-SET,OpenAI",
       "RULE-SET,Gemini",
       "RULE-SET,Google",
-      "RULE-SET,GitHub",
-      "RULE-SET,Cloudflare",
-
-      // 两个规则集未覆盖的手动规则
-      "DOMAIN-SUFFIX,gpt.com",
-      "DOMAIN-SUFFIX,apple.com",
-      "DOMAIN,ip.net.coffee"
+      "RULE-SET,GitHub"
     ]
   }
 ];
