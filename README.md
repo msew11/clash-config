@@ -28,6 +28,8 @@ Clash 扩展和小火箭默认配置是复制时的快照，不会自动跟随�
 
 来源是当前 Clash Verge Rev 2.5.10 数据目录中的 `profiles/Merge.yaml`、`profiles/Script.js`；配置索引分别标记为全局 `merge` 和 `script`。
 
+脚本中的 Claude 策略组名为 `✴️ Claude-VPS`，对应的 DNS 地址与名称判断保持一致。
+
 ### 敏感数据
 
 `Merge.template.yaml` 与源配置仅有一处语义差异：`proxy-providers.ClaudeVPS.url` 已替换为 `.invalid` 示例地址。它是脱敏模板，不能不经修改直接用于真实订阅。
