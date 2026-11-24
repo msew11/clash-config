@@ -30,7 +30,7 @@ Clash 扩展和小火箭默认配置是复制时的快照，不会自动跟随�
 
 脚本中的 Claude 策略组名为 `✴️ Claude-VPS`，对应的 DNS 地址与名称判断保持一致。
 
-`ROUTING_GROUP` 用于 Twitter（含 X）、YouTube、Twitch，规则优先于 Google 等通用规则。组内第一项为 `✴️ Claude-VPS`，其后包含全部静态代理，并通过 `include-all-providers` 引入全部代理集合的节点；可在客户端手动选择出站。首次未保存选择时默认使用第一项，而 `✴️ Claude-VPS` 初始为 REJECT，需先选择可用 VPS，或直接在 `ROUTING_GROUP` 中选择其他节点。
+`🎬 影音` 用于 Twitter（含 X）、YouTube、Twitch，规则优先于 Google 等通用规则。组内第一项为 `✴️ Claude-VPS`，其后包含全部静态代理，并通过 `include-all-providers` 引入全部代理集合的节点；可在客户端手动选择出站。首次未保存选择时默认使用第一项，而 `✴️ Claude-VPS` 初始为 REJECT，需先选择可用 VPS，或直接在 `🎬 影音` 中选择其他节点。
 
 Merge 已包含 [Twitter](https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Twitter/Twitter.list)、[YouTube](https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/YouTube/YouTube.list)、[Twitch](https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Twitch/Twitch.list) 三个规则集，均采用 classical/text 格式，每 86400 秒更新。本次新增分流仅维护 Clash 仓库配置，不修改 Shadowrocket 或本机活动配置。
 

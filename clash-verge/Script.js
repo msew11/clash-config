@@ -16,7 +16,7 @@ const ROUTING_GROUPS = [
     ]
   },
   {
-    targetGroupName: "ROUTING_GROUP",
+    targetGroupName: "🎬 影音",
     include: [],
     exclude: [],
     fixedMembers: ["✴️ Claude-VPS"],
