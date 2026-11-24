@@ -99,18 +99,3 @@ rule-providers:
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/Cloudflare/Cloudflare.list
     path: ./ruleset/Cloudflare.list
 
-proxy-providers:
-  ClaudeVPS:
-    type: http
-    url: "https://example.invalid/REPLACE_WITH_PRIVATE_CLAUDEVPS_SUBSCRIPTION"
-    path: ./proxy_providers/ClaudeVPS.yaml
-    interval: 3600
-    proxy: DIRECT
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 600
-      timeout: 8000
-      lazy: true
-    override:
-      ip-version: ipv4
