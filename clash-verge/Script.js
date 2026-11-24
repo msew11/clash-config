@@ -19,7 +19,7 @@ const ROUTING_GROUPS = [
     targetGroupName: "🌐 外网影音",
     include: [],
     exclude: [],
-    fixedMembers: ["✴️ Claude-VPS"],
+    fixedMembers: ["☀️ Claude-VPS"],
     includeAllProviders: true,
     rules: [
       "RULE-SET,Twitter",
@@ -28,13 +28,13 @@ const ROUTING_GROUPS = [
     ]
   },
   {
-    targetGroupName: "✴️ Claude-VPS",
+    targetGroupName: "☀️ Claude-VPS",
     provider: "ClaudeVPS",
     include: ["^(🇺🇸 )?VPS-Claude-(WG|Trojan)$"],
     exclude: [],
     fixedMembers: ["REJECT"],
     // 此组域名查询经同一策略组连接 Cloudflare DoH。
-    dnsServer: "https://1.1.1.1/dns-query#✴️ Claude-VPS",
+    dnsServer: "https://1.1.1.1/dns-query#☀️ Claude-VPS",
     rules: [
       "RULE-SET,Claude",
       "RULE-SET,OpenAI",
@@ -188,7 +188,7 @@ function main(config) {
       else if (type === "DOMAIN") policy[value] = item.dnsServer;
     }
     // 仅检测用；不代表所有域名的 DNS 证据。
-    if (item.targetGroupName === "✴️ Claude-VPS") {
+    if (item.targetGroupName === "☀️ Claude-VPS") {
       policy["whoami.ds.akahelp.net"] = item.dnsServer;
       policy["o-o.myaddr.l.google.com"] = item.dnsServer;
     }
