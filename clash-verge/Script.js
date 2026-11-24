@@ -16,6 +16,18 @@ const ROUTING_GROUPS = [
     ]
   },
   {
+    targetGroupName: "ROUTING_GROUP",
+    include: [],
+    exclude: [],
+    fixedMembers: ["✴️ Claude-VPS"],
+    includeAllProviders: true,
+    rules: [
+      "RULE-SET,Twitter",
+      "RULE-SET,YouTube",
+      "RULE-SET,Twitch"
+    ]
+  },
+  {
     targetGroupName: "✴️ Claude-VPS",
     provider: "ClaudeVPS",
     include: ["^(🇺🇸 )?VPS-Claude-(WG|Trojan)$"],
@@ -129,6 +141,10 @@ function main(config) {
     if (item.provider) {
       target.use = [item.provider];
       target.filter = item.include[0];
+    }
+
+    if (item.includeAllProviders) {
+      target["include-all-providers"] = true;
     }
 
     if (!customGroups.includes(target)) {
