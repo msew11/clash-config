@@ -20,6 +20,9 @@ Clash 扩展和小火箭默认配置是复制时的快照，不会自动跟随�
 
 - `default.conf` 是原件快照，不要用定制内容覆盖。
 - `claude-vps.conf` 是完整配置，不是模块；节点需要另外导入。导入后检查 `Claude-VPS` 组，并手动选择 VPS 节点；该组默认 REJECT。
+- `🌐 外网影音` 分流 Twitter／X、YouTube、Twitch，首项及初始选择为现有 `Claude-VPS` 组，之后通过 `policy-regex-filter=.*` 纳入全部已导入节点。可直接选其他节点，或在 `Claude-VPS` 内先选 VPS；后者默认 REJECT，未选择时影音流量也会被拒绝。小火箭保留原有 `Claude-VPS` 名称，不改为 Clash 的 `☀️ Claude-VPS`。
+- 更新后需重新导入或更新并启用 `claude-vps.conf`，使用“配置”全局路由；仅修改仓库文件不会改变手机当前配置。本次没有在手机上验证分组显示或实际出口。
+- 分组嵌套、手动选择及正则筛选的格式参考 [Shadowrocket 社区配置示例](https://github.com/LOWERTOP/Shadowrocket/blob/main/lazy_group.conf)。
 - 两份配置不含节点密码或订阅凭据。发布后可用完整配置的 Raw URL 导入。
 - 手机测试只确认模块 `[Rule]` 生效；模块中的 `[Proxy Group]` 未实现预期的默认 REJECT 行为，曾显示机场节点。因此本目录不提供声称已通过验证的模块版本。
 - 手机新建的测试模块不在本机源码中，本次未复制。`default.conf` 保持原样，`claude-vps.conf` 仅对齐自定义路由和 VPS 节点名筛选，没有改为模块方案。
@@ -32,7 +35,7 @@ Clash 扩展和小火箭默认配置是复制时的快照，不会自动跟随�
 
 `🌐 外网影音` 用于 Twitter（含 X）、YouTube、Twitch，规则优先于 Google 等通用规则。组内第一项为 `☀️ Claude-VPS`，其后包含全部静态代理，并通过 `include-all-providers` 引入全部代理集合的节点；可在客户端手动选择出站。首次未保存选择时默认使用第一项，而 `☀️ Claude-VPS` 初始为 REJECT，需先选择可用 VPS，或直接在 `🌐 外网影音` 中选择其他节点。
 
-Merge 已包含 [Twitter](https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Twitter/Twitter.list)、[YouTube](https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/YouTube/YouTube.list)、[Twitch](https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Twitch/Twitch.list) 三个规则集，均采用 classical/text 格式，每 86400 秒更新。本次新增分流仅维护 Clash 仓库配置，不修改 Shadowrocket 或本机活动配置。
+Merge 已包含 [Twitter](https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Twitter/Twitter.list)、[YouTube](https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/YouTube/YouTube.list)、[Twitch](https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Twitch/Twitch.list) 三个规则集，均采用 classical/text 格式，每 86400 秒更新。小火箭定制配置引用相同的三个规则集；客户端活动配置需另行更新。
 
 ### 敏感数据
 
@@ -58,14 +61,14 @@ Merge 已包含 [Twitter](https://github.com/blackmatrix7/ios_rule_script/blob/m
 以 `clash-verge/Script.js` 执行生成的规则顺序及 `Merge.template.yaml` 的规则集 URL 为准，`shadowrocket/claude-vps.conf` 的置顶规则为：
 
 1. `niumatoken.com`、`niumacode.cc` → `🐎 牛马`。
-2. Claude、OpenAI、Gemini、Google、GitHub、Cloudflare 六个远程规则集，保持相同顺序及 URL → `Claude-VPS`。
-3. `gpt.com`、`apple.com` 后缀及精确域名 `ip.net.coffee` → `Claude-VPS`；不再将 `ip.net.coffee` 直连。
+2. Twitter、YouTube、Twitch 三个远程规则集 → `🌐 外网影音`，优先于后面的 Google 等通用规则。
+3. Claude、OpenAI、Gemini、Google、GitHub 五个远程规则集，保持与 Clash 相同的顺序及 URL → 小火箭现有 `Claude-VPS` 组（Clash 中名为 `☀️ Claude-VPS`）。
 
 VPS 节点筛选也接受 Clash 脚本支持的可选 `🇺🇸 ` 名称前缀；小火箭仍默认 REJECT，需手动选节点。其后保留原版默认规则，不迁移机场专属组或兜底配置。
 
 对齐范围是自定义分流规则，不是完整客户端行为：Clash 脚本还生成分域名 DNS 策略，小火箭仍保留原始 system DNS 设置。未声称 DNS、远程规则下载和实际出口已通过手机验收。
 
-## 本次验证
+## 历史快照验证
 
 - `default.conf` 原始基线保持不变，`Script.js` 与复制时的活动源文件逐字节一致。
 - `Merge.template.yaml` 可解析为 YAML；与源文件结构比较，只有上述订阅 URL 发生变化。
@@ -74,3 +77,5 @@ VPS 节点筛选也接受 Clash 脚本支持的可选 `🇺🇸 ` 名称前缀�
 - 执行 Clash `main()` 并将规则集名映射为 Merge 中的 URL，确认小火箭前 11 条自定义规则与执行结果逐条、按顺序一致；后续全部原版规则及其余基线节保持不变。
 - 检查 `ip.net.coffee`、Apple、gpt 和牛马域名的规则优先级，以及带/不带美国旗帜的 VPS 节点名筛选、机场名称排除。
 - 未在 Clash Verge 的脚本引擎重新运行或应用配置；Node 冒烟不等于客户端端到端验收。未验证远程 URL，因为尚未发布。
+
+当前影音分流另做静态配置与远程规则匹配检查；手机上的导入、分组排序、手动选择及实际出口仍需在 Shadowrocket 中验证。
